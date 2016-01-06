@@ -1,0 +1,38 @@
+<% include partials/header.ejs%>
+
+
+
+<div class="container">
+<div class = "row">
+<div class ="col-md-9 col-md-offset-1">
+ 
+  <h1>Hello, <%= user.username %></h1>
+
+  <h3>Here is a list of all posts:</h3>
+
+  <hr>
+
+<div class="posts">
+  <% allPosts.forEach(function(post,index){ %>
+  <h2>Title: <a href="users/<%= post.User.id %>/posts/<%=post.id %>"><%= post.title %></a> <small>by <a href="/users/<%= post.UserId%>/posts"><%=post.User.username  %></a></small></h2>
+  <hr>
+ 
+  <% }); %>
+</div>
+
+	
+<!-- <a href="/logout" class = "btn btn-danger btn-lg">Log Out</a> -->
+</div>
+
+<div class="col-md-2"></div>
+</div>
+</div>
+
+	
+
+<% include partials/footer.ejs%>
+
+
+
+
+

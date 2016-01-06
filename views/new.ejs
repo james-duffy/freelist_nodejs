@@ -1,0 +1,44 @@
+<% include partials/header %>
+
+<script>
+	if(navigator.geolocation){
+		navigator.geolocation.getCurrentPosition(function(data){
+			
+			var latitudeInput = document.getElementById("lat")
+			latitudeInput.value = data.coords.latitude;
+
+			var longitudeInput = document.getElementById("long")
+			longitudeInput.value = data.coords.longitude;		
+
+		})
+	}
+
+</script>
+
+<% if(currentUser.id !== user.id){ %>
+      <h1 style = "color:red;">You do not have access to this page, please go <a href="/">home</a></h1>
+      <% } else { %>
+
+  <br>
+
+  <form action="/posts" method="POST">
+    <input name="post[title]" placeholder="title"><br>
+    <br>
+    	<textarea name="post[description]" rows="4" cols="30" wrap="hard" maxlength="80" placeholder="description, max 80 chars"></textarea><br>
+    <br>
+    <input type="hidden" name="post[UserId]" value="<%= user.id %>">
+    <input type="hidden" id = "lat" name="latitude">
+    <input type="hidden" id = "long"  name="longitude">
+    <input type="hidden" role="uploadcare-uploader"
+           data-crop="300x200 upscale"
+           data-images-only="true"
+           name="image_url"
+           />
+    <br>
+    <input type="submit" class="btn btn-success save-btn" value="Save">
+  </form>
+  <% } %>
+<% include partials/footer %>
+
+
+

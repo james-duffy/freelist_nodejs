@@ -1,0 +1,44 @@
+<% include partials/header.ejs%>
+
+
+<!-- 	<h1>This is the author's ID <%= user.id %></h1>
+	<h1>This is my ID <%= currentUser.id %></h1> -->
+
+  <h2>All likes by <%= user.username %></h2>
+  <!-- <h2>All posts by <%= user.id %></h2> -->
+  <hr>
+
+	<% if(currentUser.id === user.id){ %>
+
+	<% } %>
+
+
+  <% likes.forEach(function(like,index){ %>
+  <% if(like.isLiked === true){ %>
+  <div class="row">
+    <div class="col-xs-4 col-xs-offset-4">
+      <h2><a href="posts/<%=like.Post.id %>"><%= like.Post.title %></a></h2>
+  on 
+  <p><%=like.Post.createdAt %></p>
+  <p class="description"><%=like.Post.description %></p>
+
+    </div>
+  </div>
+  <% } %>
+  <% if(currentUser.id === user.id){ %> 
+  
+  	<form action="/likes/<%= like.Post.id %>/dislike?_method=put" method ="POST">
+  	 <input class = "btn btn-danger" type="submit" value ="Unlike">
+  	</form>
+  <br>
+  <hr>
+  <br>
+
+  <% } else { %>
+  <% } %>
+  <% }); %>
+
+
+
+
+<% include partials/footer.ejs%>

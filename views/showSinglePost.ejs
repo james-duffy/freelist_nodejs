@@ -1,0 +1,44 @@
+<% include partials/header.ejs%>
+
+<h2><%= post.title %></h2>
+
+<p>
+  <%= post.description %>
+</p>
+
+<img src="<%= post.image_url %>"/>
+
+<p>
+  Location: <%= post.location %>
+</p>
+
+<p>
+	Number of likes: <%= likes.length %>
+</p>
+
+
+<form style="display:inline-block;" action="/liked" method = "POST">
+    <input type="hidden" name="UserId" value="<%= user.id%>">
+    <input type="hidden" name="PostId" value="<%= post.id%>">
+    <input type="hidden" name="CurrentUserId" value="<%= currentUser.id%>">
+    <input type="submit" class = "btn btn-warning btn-lg" value="Like it!">
+</form>
+
+<% if (user.id !== currentUser.id) { %>
+<form style="display:inline-block;" onsubmit="return confirm('Are you sure?');" action="/grabbed" method = "POST">
+    <input type="hidden" name="UserId" value="<%= user.id%>">
+    <input type="hidden" name="PostId" value="<%= post.id%>">
+    <input type="hidden" name="CurrentUserId" value="<%= currentUser.id%>">
+    <input type="submit" class = "btn btn-success btn-lg" value="Grab it!">
+</form>
+<% } %> 
+
+
+
+
+<p>
+	<a href="/">Go home</a>
+</p>
+
+
+<% include partials/footer.ejs%>

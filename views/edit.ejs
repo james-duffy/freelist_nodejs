@@ -1,0 +1,34 @@
+<% include partials/header %>
+
+<% if(currentUser.id !== user.id){ %>
+      <h1 style = "color:red;">You do not have access to this page, please go <a href="/">home</a></h1>
+      <% } else { %>
+
+<!-- Added by me at 3pm 10-29-14 -->
+	<% if (typeof errMsg != 'undefined') { %>
+		<div class = "alert alert-success">
+      <%= errMsg %>
+    </div>
+	<% } %>
+
+
+
+  <form action="/users/<%= user.id%>/posts/<%= post.id %>?_method=put" method="POST">
+    <input name="post[title]" value="<%= post.title %>" autofocus><br>
+    <br>
+    <textarea name="post[description]" rows="4" cols="30" wrap="hard" maxlength="80" ><%= description %></textarea><br>
+    <br>
+    <input type="hidden" role="uploadcare-uploader"
+           data-crop="300x200 upscale"
+           data-images-only="true"
+           name="image_url"
+          />
+    <br>
+    <br>
+    <input type="submit" value="Save Changes">
+  </form>
+  <% } %>
+<% include partials/footer %>
+
+
+

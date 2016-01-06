@@ -1,0 +1,47 @@
+<% include partials/header.ejs%>
+
+
+<!-- 	<h1>This is the author's ID <%= user.id %></h1>
+	<h1>This is my ID <%= currentUser.id %></h1> -->
+
+  <h2>All posts by <%= user.username %></h2>
+  <!-- <h2>All posts by <%= user.id %></h2> -->
+  <hr>
+
+	<% if(currentUser.id === user.id){ %>
+	<br>
+  	<a href="/users/<%= user.id %>/posts/new">Add a new post</a>
+  <br>
+	<% } %>
+
+
+  <% allPosts.forEach(function(post,index){ %>
+  <% if(post.hasWon !== true){ %>
+  <div class="row">
+    <div class="col-xs-4 col-xs-offset-4">
+      <h2><a href="posts/<%=post.id %>"><%= post.title %></a></h2>
+  on 
+  <p><%=post.createdAt %></p>
+  <p class="description"><%=post.description %></p>
+
+    </div>
+  </div>
+  <% } %>
+  <% if(currentUser.id === user.id && post.hasWon === false){ %> 
+  	<a href="/users/<%= user.id %>/posts/<%= post.id %>/edit">Edit</a>
+  
+  	<form action="/users/<%= user.id %>/posts/<%= post.id %>?_method=delete" method ="POST">
+  	<input type="submit" value ="Delete">
+  	</form>
+  <br>
+  <hr>
+  <br>
+
+  <% } else { %>
+  <% } %>
+  <% }); %>
+
+
+
+
+<% include partials/footer.ejs%>
